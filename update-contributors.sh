@@ -1,5 +1,14 @@
-data=$(curl -s https://api.github.com/repos/epfl-dojo/contributeurs-trombinoscope/contributors | jq -r '.[] | "  - [@\(.login)](\(.html_url))"')
+#!/bin/sh
+set -e
 
-echo "$data"
-# sed  's/unix/linux/' README.md
-sed -e "/BEGIN/,/END/c\BEGIN\n$(echo $data)\nEND" README.md
+if [ "$(uname)" == "Darwin" ] ; then
+	SED=gsed
+else
+	SED=sed 
+fi
+
+$SED -e '/<!-- Start contributor trombinoscope -->/q' README.md     > README_new.md
+curl -s https://api.github.com/repos/epfl-dojo/contributeurs-trombinoscope/contributors | jq -r '.[] | "  - [@\(.login)](\(.html_url))"' >> README_new.md
+$SED -ne '/<!-- End contributor trombinoscope -->/,$ p' README.md  >> README_new.md
+
+mv README_new.md README.md
