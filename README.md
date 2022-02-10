@@ -18,8 +18,8 @@ The script will insert the contributors list between these markers.
 A few different modes are available:
 
 * **bullet**: provide a [MarkDown] list of username's handles. This is the default.
-* **XXX**: WIP
 * **tombinoscope**: provide a [HTML] list of username's pictures.
+* **bubble**: provide a [MarkDown] list of username's rounded pictures.
 
 To set a different mode, add the `mode:modename` attribute after
 `start_contributors`, e.g. `<!-- start_contributors mode:bullet -->`.

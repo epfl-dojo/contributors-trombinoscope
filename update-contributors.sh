@@ -38,6 +38,12 @@ fetch_contributors_as_images_list () {
   echo "${CONTRIBUTORS_LIST}" > tmp_data
 }
 
+# Bubble
+fetch_contributors_as_bubble_images_list () {
+  CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/epfl-dojo/contributeurs-trombinoscope/contributors | jq -r '.[] | "![@\(.login) avatar](https://images.weserv.nl/?url=\(.avatar_url)&h=144&w=144&fit=cover&mask=circle&maxage=7d)"'); \
+  echo "${CONTRIBUTORS_LIST}" > tmp_data
+}
+
 }
 
 # Insert the contributors list between the markers
@@ -53,6 +59,9 @@ case $MODE in
   ;;
 [tT]rombinoscope)
   fetch_contributors_as_images_list
+  ;;
+[bB]ubble)
+  fetch_contributors_as_bubble_images_list
   ;;
   ;;
 *)
