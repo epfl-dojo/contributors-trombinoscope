@@ -4,6 +4,10 @@
 LEAD='^<!-- start_contributors .*-->$'
 TAIL='^<!-- end_contributors .*-->$'
 
+# Leave blank for no backup.
+# *.bak, *.back, *.backup, *.copy, *.tmp, *.previous are git ignored
+BACKUP_SUFFIX=.backup
+
 # TODO: get these from the current repo
 USER=epfl-dojo
 REPO=contributeurs-trombinoscope
@@ -16,7 +20,7 @@ contrib_list () {
 }
 
 contrib_list
-sed -i -e "/$LEAD/,/$TAIL/{ /$LEAD/{p; r tmp_data
+sed -i$BACKUP_SUFFIX -e "/$LEAD/,/$TAIL/{ /$LEAD/{p; r tmp_data
 }; /$TAIL/p; d }" README.md
 
 cat README.md

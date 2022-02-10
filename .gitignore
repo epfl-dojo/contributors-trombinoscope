@@ -1,2 +1,8 @@
 tmp_data
 output.html
+*.bak
+*.back
+*.backup
+*.copy
+*.tmp
+*.previous
