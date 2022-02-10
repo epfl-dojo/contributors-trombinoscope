@@ -30,7 +30,14 @@ get_list_mode () {
 fetch_contributors_as_a_bullet_list () {
   CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/${USER}/${REPO}/contributors | jq -r '.[] | "  * [@\(.login)](\(.html_url))"'); \
   echo "${CONTRIBUTORS_LIST}" > tmp_data
-  # cat tmp_data
+}
+
+# Trombinoscope
+fetch_contributors_as_images_list () {
+  CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/epfl-dojo/contributeurs-trombinoscope/contributors | jq -r '.[] | "<a href=\"\(.html_url)\"><img src=\"\(.avatar_url)\" title=\"\(.login)´s profile\" width=\"50px\" /></a>&nbsp;"'); \
+  echo "${CONTRIBUTORS_LIST}" > tmp_data
+}
+
 }
 
 # Insert the contributors list between the markers
@@ -44,8 +51,9 @@ case $MODE in
 [bB]ullet)
   fetch_contributors_as_a_bullet_list
   ;;
-trombinoscope)
-  echo "WIP"
+[tT]rombinoscope)
+  fetch_contributors_as_images_list
+  ;;
   ;;
 *)
   fetch_contributors_as_a_bullet_list
