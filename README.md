@@ -11,7 +11,18 @@ Place these HTML comments to delimit the contributors list:
 > \<\!-- start_contributors -->  
 > \<\!-- end_contributors -->
 
-The script will insert the contributors list between these markers. 
+The script will insert the contributors list between these markers.
+
+### Modes
+
+A few different modes are available:
+
+* **bullet**: provide a [MarkDown] list of username's handles. This is the default.
+* **XXX**: WIP
+* **XXX**: WIP
+
+To set a different mode, add the `mode:modename` attribute after
+`start_contributors`, e.g. `<!-- start_contributors mode:bullet -->`.
 
 ## Test
 
@@ -19,7 +30,8 @@ An easy way to test the result is to use [pandoc]:
 `pandoc -s -f gfm -t html5 -o output.html README.md`
 
 ## Contributors
-<!-- start_contributors key:value mode:link -->
+
+<!-- start_contributors mode:bullet -->
   * [@SaphireVert](https://github.com/SaphireVert)
   * [@D4rkHeart](https://github.com/D4rkHeart)
   * [@Azecko](https://github.com/Azecko)
@@ -34,3 +46,4 @@ An easy way to test the result is to use [pandoc]:
 
 [github actions]: https://pandoc.org/MANUAL.html
 [pandoc]: https://pandoc.org/MANUAL.html
+[markdown]: https://daringfireball.net/projects/markdown/
