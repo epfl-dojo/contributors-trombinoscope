@@ -1,28 +1,36 @@
 #!/usr/bin/env bash
 # set -e -x
 
+# Target file
 TARGET=README.md
 
+# Markers
 LEAD='^<!-- start_contributors .*-->$'
 TAIL='^<!-- end_contributors .*-->$'
 
 # Leave blank for no backup.
 # *.bak, *.back, *.backup, *.copy, *.tmp, *.previous are git ignored
-BACKUP_SUFFIX=.backup
+BACKUP_SUFFIX=.previous
 
+# Target URL
 # TODO: get these from the current repo
 USER=epfl-dojo
 REPO=contributeurs-trombinoscope
 
 # Fetch the contributors list
-contrib_list () {
+fetch_contributors_as_a_bullet_list () {
   CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/${USER}/${REPO}/contributors | jq -r '.[] | "  * [@\(.login)](\(.html_url))"'); \
   echo "${CONTRIBUTORS_LIST}" > tmp_data
   cat tmp_data
 }
 
-contrib_list
-sed -i$BACKUP_SUFFIX -e "/$LEAD/,/$TAIL/{ /$LEAD/{p; r tmp_data
+# Insert the contributors list between the markers
+update_contributors_in_file () {
+  sed -i$BACKUP_SUFFIX -e "/$LEAD/,/$TAIL/{ /$LEAD/{p; r tmp_data
 }; /$TAIL/p; d }" $TARGET
+}
+
+fetch_contributors_as_a_bullet_list
+update_contributors_in_file
 
 cat $TARGET
