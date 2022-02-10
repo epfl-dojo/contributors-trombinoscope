@@ -19,6 +19,7 @@ A few different modes are available:
 
 * **bullet**: provide a [MarkDown] list of username's handles. This is the default.
 * **tombinoscope**: provide a [HTML] list of username's pictures.
+* **figure**: provide a [HTML] list of username's pictures and handles.
 * **bubble**: provide a [MarkDown] list of username's rounded pictures.
 
 To set a different mode, add the `mode:modename` attribute after

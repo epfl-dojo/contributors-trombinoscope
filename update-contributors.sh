@@ -44,6 +44,12 @@ fetch_contributors_as_bubble_images_list () {
   echo "${CONTRIBUTORS_LIST}" > tmp_data
 }
 
+# HTML figure
+fetch_contributors_as_HTML_figures () {
+  echo "HELLO AGAIN"
+  CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/epfl-dojo/contributeurs-trombinoscope/contributors | \
+    jq -r '.[] | "<figure><img src=\"\(.avatar_url)\" alt=\"\(.login)´s profile\" width=\"250px\" /><figcaption><a href=\"\(.html_url)\">@\(.login)</a></figcaption></figure>"'); \
+  echo "${CONTRIBUTORS_LIST}" > tmp_data
 }
 
 # Insert the contributors list between the markers
@@ -63,6 +69,8 @@ case $MODE in
 [bB]ubble)
   fetch_contributors_as_bubble_images_list
   ;;
+[fF]igure)
+  fetch_contributors_as_HTML_figures
   ;;
 *)
   fetch_contributors_as_a_bullet_list
