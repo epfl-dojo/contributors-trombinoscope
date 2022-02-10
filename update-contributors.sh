@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # set -e -x
 
+TARGET=README.md
+
 LEAD='^<!-- start_contributors .*-->$'
 TAIL='^<!-- end_contributors .*-->$'
 
@@ -21,6 +23,6 @@ contrib_list () {
 
 contrib_list
 sed -i$BACKUP_SUFFIX -e "/$LEAD/,/$TAIL/{ /$LEAD/{p; r tmp_data
-}; /$TAIL/p; d }" README.md
+}; /$TAIL/p; d }" $TARGET
 
-cat README.md
+cat $TARGET
