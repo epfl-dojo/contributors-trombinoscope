@@ -34,6 +34,11 @@ To set a different mode, add the `mode:modename` attribute after
 Run the script (`./update-contributors.sh`) to insert the contributors list
 between these markers.
 
+If you trust this script, you can run it directly in a directory with
+```
+wget -O - https://raw.githubusercontent.com/epfl-dojo/contributors-trombinoscope/main/update-contributors.sh | bash
+```
+
 ### Run as GitHub action
 
 The file [contributors.yml](./.github/workflows/contributors.yml) provides an

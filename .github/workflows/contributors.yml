@@ -26,7 +26,7 @@ jobs:
 
       # Runs the update-contributors.sh script
       - name: update README.md
-        run: wget -O - https://raw.githubusercontent.com/epfl-dojo/contributeurs-trombinoscope/main/update-contributors.sh | bash
+        run: wget -O - https://raw.githubusercontent.com/epfl-dojo/contributors-trombinoscope/main/update-contributors.sh | bash
 
       # Runs a set of commands using the runners shell
       - name: commit README.md if changed
