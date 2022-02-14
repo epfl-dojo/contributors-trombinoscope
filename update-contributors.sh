@@ -16,8 +16,15 @@ BACKUP_SUFFIX=.previous
 
 # Target URL
 # TODO: get these from the current repo
-USER=$(git config --get remote.origin.url | cut -d ':' -f2 | cut -d '/' -f1)
-REPO_TEMP=$(git config --get remote.origin.url | cut -d ':' -f2 | cut -d '/' -f2)
+REMOTE=$(git config --get remote.origin.url)
+ISHTTP=$(echo ${REMOTE} | cut -d '/' -f1)
+if [[ "$ISHTTP" == "https:" ]]; then
+  USER=$(echo $REMOTE | cut -d '/' -f4)
+  REPO_TEMP=$(echo $REMOTE | cut -d '/' -f5)
+else
+  USER=$(echo $REMOTE | cut -d ':' -f2 | cut -d '/' -f1)
+  REPO_TEMP=$(echo $REMOTE | cut -d ':' -f2 | cut -d '/' -f2)
+fi
 REPO="${REPO_TEMP%%.*}"
 
 # When mode:something is used
