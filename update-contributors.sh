@@ -3,6 +3,12 @@
 # TODO:
 #  - manage GitHub API's rate limit
 #  - use script args / docopt from TARGET, USET, REMOTE, START and END
+#  - make it works on Darwin
+#    if [ "$(uname)" == "Darwin" ] ; then
+#      SED=gsed
+#    else
+#      SED=sed
+#    fi
 #
 # set -e -x
 
