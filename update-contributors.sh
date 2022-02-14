@@ -16,8 +16,9 @@ BACKUP_SUFFIX=.previous
 
 # Target URL
 # TODO: get these from the current repo
-USER=epfl-dojo
-REPO=contributeurs-trombinoscope
+USER=$(git config --get remote.origin.url | cut -d ':' -f2 | cut -d '/' -f1)
+REPO_TEMP=$(git config --get remote.origin.url | cut -d ':' -f2 | cut -d '/' -f2)
+REPO="${REPO_TEMP%%.*}"
 
 # When mode:something is used
 get_list_mode () {
