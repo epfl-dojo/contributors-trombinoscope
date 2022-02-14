@@ -34,20 +34,20 @@ fetch_contributors_as_a_bullet_list () {
 
 # Trombinoscope
 fetch_contributors_as_images_list () {
-  CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/epfl-dojo/contributeurs-trombinoscope/contributors | jq -r '.[] | "<a href=\"\(.html_url)\"><img src=\"\(.avatar_url)\" title=\"\(.login)´s profile\" width=\"50px\" /></a>&nbsp;"'); \
+  CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/${USER}/${REPO}/contributors | jq -r '.[] | "<a href=\"\(.html_url)\"><img src=\"\(.avatar_url)\" title=\"\(.login)´s profile\" width=\"50px\" /></a>&nbsp;"'); \
   echo "${CONTRIBUTORS_LIST}" > tmp_data
 }
 
 # Bubble
 fetch_contributors_as_bubble_images_list () {
-  CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/epfl-dojo/contributeurs-trombinoscope/contributors | jq -r '.[] | "![@\(.login) avatar](https://images.weserv.nl/?url=\(.avatar_url)&h=144&w=144&fit=cover&mask=circle&maxage=7d)"'); \
+  CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/${USER}/${REPO}/contributors | jq -r '.[] | "![@\(.login) avatar](https://images.weserv.nl/?url=\(.avatar_url)&h=144&w=144&fit=cover&mask=circle&maxage=7d)"'); \
   echo "${CONTRIBUTORS_LIST}" > tmp_data
 }
 
 # HTML figure
 fetch_contributors_as_HTML_figures () {
   echo "HELLO AGAIN"
-  CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/epfl-dojo/contributeurs-trombinoscope/contributors | \
+  CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/${USER}/${REPO}/contributors | \
     jq -r '.[] | "<figure><img src=\"\(.avatar_url)\" alt=\"\(.login)´s profile\" width=\"250px\" /><figcaption><a href=\"\(.html_url)\">@\(.login)</a></figcaption></figure>"'); \
   echo "${CONTRIBUTORS_LIST}" > tmp_data
 }
