@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+#
+# TODO:
+#  - manage GitHub API's rate limit
+#  - use script args / docopt from TARGET, USET, REMOTE, START and END
+#
 # set -e -x
 
 # Target file
@@ -15,16 +20,18 @@ TAIL="^<!-- ${END} .*-->$"
 BACKUP_SUFFIX=.previous
 
 # Target URL
-# TODO: get these from the current repo
 REMOTE=$(git config --get remote.origin.url)
 ISHTTP=$(echo ${REMOTE} | cut -d '/' -f1)
+# If it's https://github.com/...
 if [[ "$ISHTTP" == "https:" ]]; then
   USER=$(echo $REMOTE | cut -d '/' -f4)
   REPO_TEMP=$(echo $REMOTE | cut -d '/' -f5)
+# If it's git@github.com...
 else
   USER=$(echo $REMOTE | cut -d ':' -f2 | cut -d '/' -f1)
   REPO_TEMP=$(echo $REMOTE | cut -d ':' -f2 | cut -d '/' -f2)
 fi
+# Trim ".git" if still present
 REPO="${REPO_TEMP%%.*}"
 
 # When mode:something is used
@@ -47,8 +54,9 @@ fetch_contributors_as_images_list () {
 }
 
 # Bubble
+# NOTE: 830 is the width on GitHub, 118px for 7 thumbnails, 138px for 6, 166px for 5
 fetch_contributors_as_bubble_images_list () {
-  CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/${USER}/${REPO}/contributors | jq -r '.[] | "![@\(.login) avatar](https://images.weserv.nl/?url=\(.avatar_url)&h=144&w=144&fit=cover&mask=circle&maxage=7d)"'); \
+  CONTRIBUTORS_LIST=$(curl -s https://api.github.com/repos/${USER}/${REPO}/contributors | jq -r '.[] | "![@\(.login) avatar](https://images.weserv.nl/?url=\(.avatar_url)&h=118&w=118&fit=cover&mask=circle&maxage=7d)"'); \
   echo "${CONTRIBUTORS_LIST}" > tmp_data
 }
 
