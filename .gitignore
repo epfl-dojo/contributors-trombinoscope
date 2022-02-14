@@ -1,5 +1,6 @@
 tmp_data
 output.html
+output_*.html
 *.bak
 *.back
 *.backup

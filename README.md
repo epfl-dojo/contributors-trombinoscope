@@ -9,14 +9,13 @@ a file. It's meant to be used in [GitHub actions].
 
 ## Usage
 
-Place these HTML comments to delimit the contributors list:
+Place these HTML comments to delimit the contributors list in README.md:
 ```html
   <!-- start_contributors -->
+    anything
   <!-- end_contributors -->
 ```
-
-The script will insert the contributors list between these markers.
-
+<small>Please note that markers should not contain any spaces before them.</small>
 
 ### Modes
 
@@ -29,6 +28,17 @@ A few different modes are available:
 
 To set a different mode, add the `mode:modename` attribute after
 `start_contributors`, e.g. `<!-- start_contributors mode:bullet -->`.
+
+### Run manually
+
+Run the script (`./update-contributors.sh`) to insert the contributors list
+between these markers.
+
+### Run as GitHub action
+
+The file [contributors.yml](./.github/workflows/contributors.yml) provides an
+example to use it as GitHub actions. This is how it is done for this README.md
+
 
 ## Test
 
@@ -43,7 +53,7 @@ pandoc -s -f gfm -t html5 -o output.html README.md
 - [ ] add more modes, as an HTML table
 - [ ] manage the GitHub API error, such a rate limit
 - [ ] add examples of all mode
-- [ ] make it work in github action and provide an HowTo
+- [ ] provide ways to sort the list (number of contributions, alphabetically, etc.)
 
 
 ## Contributors
